@@ -9,13 +9,13 @@
 def depositar(valor, saldo_conta, saldo_inicial, extrato, entradas = [],  /):
     if valor > 0:
         saldo_inicial += valor
-        saldo_conta = saldo_inicial
+        saldo_conta += saldo_inicial
         entradas.append(valor) 
         extrato = f'Valor na Conta:  {saldo_conta:.2f}\n'
         print(extrato)   
-        return saldo_conta, saldo_inicial
+        return saldo_conta, saldo_inicial, entradas
 
-def sacar(*, valor, saldo_conta, extrato, saida = [], excedeu_saldo,
+def sacar(*, valor, saldo_conta, extrato, saidas = [], excedeu_saldo,
     excedeu_limite, excedeu_saques, valor_limite_saque,numero_de_saques,
     LIMITE_SAQUES):
 
@@ -38,14 +38,19 @@ def sacar(*, valor, saldo_conta, extrato, saida = [], excedeu_saldo,
         
     elif valor > 0:
         saldo_conta -= valor
-        saida.append(saldo_conta)
+        saidas.append(valor)
         extrato = f'Valor: {saldo_conta}'
         print(extrato)
         numero_de_saques += 1
 
-    return valor, saldo_conta    
+    return saidas, saldo_conta, numero_de_saques,    
 
-def 
+def exibir_extratos(extrato, entradas, saidas):
+    print("------Extrato------")
+    print(f'Valor Depositado: R$ {sum(entradas)},00\n'
+          f'Valor de Saque: R$ {sum(saidas)},00\n'
+          f'Saldo Atual R$ {extrato:.2f}')    
+    
 
 # main        
 def main():
@@ -66,8 +71,12 @@ def main():
     valor_limite_saque = 500
     numero_de_saques = 0
 
+    entradas = []
+    saidas = []
+
     while True:
-     
+        print(entradas)
+        print(saidas)
         opcao =  int(input("""
         ======= Sistema =======
             [1] - Depositar
@@ -82,11 +91,11 @@ def main():
         if opcao == 1:
 
             valor = float(input("Informe o valor de deposito: "))
-            saldo_conta, extrato = depositar(valor,saldo_conta, saldo_inicial ,extrato )
+            saldo_conta, extrato, entradas = depositar(valor,saldo_conta, saldo_inicial ,extrato, entradas )
 
-        if opcao == 2:
+        elif opcao == 2:
             valor= float(input("Digite o valor de saque: "))
-            saldo_conta, extrato = sacar(
+            saldo_conta, numero_de_saques, saidas = sacar(
                 valor = valor,
                 saldo_conta = saldo_conta,
                 extrato = extrato,
@@ -95,9 +104,11 @@ def main():
                 excedeu_saques = excedeu_saques,
                 LIMITE_SAQUES = LIMITE_SAQUES,
                 valor_limite_saque = valor_limite_saque,
-                numero_de_saques = numero_de_saques
-                
-            )    
+                numero_de_saques = numero_de_saques,
+                saidas = saidas    
+            )
+        elif opcao == 3:
+           exibir_extratos(extrato, entradas = entradas, saidas = saidas)        
          
    
 
