@@ -3,7 +3,33 @@
 
 
 
+# criando usuarios
 
+def criar_usuario(*,id,nome, sobrenome, idade, cadastro = [] ):
+    if id in cadastro:
+        print("Usuario já existente")
+
+    else:
+        cadastro.append(id)
+        cadastro.append(nome)
+        cadastro.append(sobrenome)
+        cadastro.append(idade)
+        print()
+        print("cadastro realizado com sucesso!!")
+
+    return id, nome, sobrenome, idade, cadastro
+
+def listar_usuarios(cadastro):
+    for indice, dados in enumerate(cadastro):
+        print(indice,dados)
+        
+    print()
+       
+    
+    
+
+def criar_conta(numero_conta):
+    return numero_conta
 
 
 def depositar(valor, saldo_conta, saldo_inicial, extrato, entradas = [],  /):
@@ -43,13 +69,15 @@ def sacar(*, valor, saldo_conta, extrato, saidas = [], excedeu_saldo,
         print(extrato)
         numero_de_saques += 1
 
-    return saidas, saldo_conta, numero_de_saques,    
+    return saldo_conta, numero_de_saques, saidas    
 
 def exibir_extratos(extrato, entradas, saidas):
     print("------Extrato------")
-    print(f'Valor Depositado: R$ {sum(entradas)},00\n'
-          f'Valor de Saque: R$ {sum(saidas)},00\n'
-          f'Saldo Atual R$ {extrato:.2f}')    
+    print(f'Valores Depositados: R$ {entradas}\n'
+          f'Totais Depositos: R$ {sum(entradas)}\n'
+          f'Valores de Saques: R$ {saidas}\n'
+          f'Total de Saques: R$ {sum(saidas)}\n'
+          f'Saldo Atual em Conta: R$ {extrato:.2f}')    
     
 
 # main        
@@ -73,12 +101,23 @@ def main():
 
     entradas = []
     saidas = []
+    
+    #Variaveis para cadastro de conta
+    id = 0
+    nome = "",
+    sobrenome = "",
+    idade = "",
+    cadastro = []
+    validar = 0
 
     while True:
-        print(entradas)
-        print(saidas)
-        opcao =  int(input("""
+       
+        opcao =  str(input("""
         ======= Sistema =======
+            [C] - Criar Usuario
+            [L] - Listar Usuario
+            [D] - Deletar usuario
+                                                                        
             [1] - Depositar
             [2] - Sacar
             [3] - Extrato
@@ -88,12 +127,12 @@ def main():
         :"""))
          
         
-        if opcao == 1:
+        if opcao == '1':
 
             valor = float(input("Informe o valor de deposito: "))
             saldo_conta, extrato, entradas = depositar(valor,saldo_conta, saldo_inicial ,extrato, entradas )
 
-        elif opcao == 2:
+        elif opcao == '2':
             valor= float(input("Digite o valor de saque: "))
             saldo_conta, numero_de_saques, saidas = sacar(
                 valor = valor,
@@ -106,11 +145,29 @@ def main():
                 valor_limite_saque = valor_limite_saque,
                 numero_de_saques = numero_de_saques,
                 saidas = saidas    
-            )
-        elif opcao == 3:
+            )    
+        elif opcao == '3':
            exibir_extratos(extrato, entradas = entradas, saidas = saidas)        
-         
-   
+
+        elif opcao == 'c':
+           id =  int(input("Digite o id do usuario: "))
+           nome = str(input("Nome: "))
+           sobrenome = str(input("Sobrenome: "))
+           idade = str(input("idade: "))
+           id,nome, sobrenome, idade,cadastro = criar_usuario(id = id, nome = nome, sobrenome = sobrenome, idade=idade, cadastro=cadastro)
+
+
+        elif opcao == 'l':
+            listar_usuarios(cadastro)
+
+        elif opcao == 'd':
+             print("id: ", listar_usuarios(cadastro[id]))
+             
+             validar =  int(input("Digite o id do usuario: "))
+             if validar in cadastro:
+                 pop.criar_usuario()
+        elif opcao == 4:
+            break
 
 main()
 
