@@ -5,7 +5,7 @@
 valor = 0
 saldo_inicial = 0
 valor_limite_saque = 500
-saldo_conta = saldo_inicial
+saldo_conta = 0
 
 saidas = []
 entradas = []
@@ -30,14 +30,15 @@ while True:
         =======================
 
         :"""))
-
+    print(saldo_conta)
     # Depositar
     if opcao == 1:
         
         print("------Depositar-----")
         valor = int(input("Valor do Deposito: "))
         if valor > 0:
-            saldo_conta += valor
+            saldo_inicial += valor
+            saldo_conta = saldo_inicial
             entradas.append(valor)
             print()
             print(f'Saldo: R$ {saldo_conta},00')
