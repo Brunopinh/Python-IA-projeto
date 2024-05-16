@@ -1,15 +1,11 @@
+item = []
 
-def lista_equipamentos(itens = []):
-    print('Lista de Equipamentos:')
-    for iten in itens:
-        print(f'- {iten}')
-
-
-
-itens = []
-
-valor = str(input("Digite o nome dos objetos: "))
-itens.append(valor)
-lista_equipamentos(itens)
+# Valida os dados 
+for _ in range(3):
+    valor = input("")
+    item.append(valor)
 
 
+print("Lista de Equipamentos:")
+for itens in item:
+    print(f'- {itens}')    
