@@ -160,12 +160,12 @@ def main():
         elif opcao == 'l':
             listar_usuarios(cadastro)
 
-        elif opcao == 'd':
-             print("id: ", listar_usuarios(cadastro[id]))
+       # elif opcao == 'd':
+        #     print("id: ", listar_usuarios(cadastro[id]))
              
-             validar =  int(input("Digite o id do usuario: "))
-             if validar in cadastro:
-                 pop.criar_usuario()
+         #    validar =  int(input("Digite o id do usuario: "))
+            # if validar in cadastro:
+               #  pop.criar_usuario()
         elif opcao == 4:
             break
 
