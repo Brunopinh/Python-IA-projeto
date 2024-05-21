@@ -20,16 +20,24 @@ def criar_usuario(*,id,nome, sobrenome, idade, cadastro = [] ):
     return id, nome, sobrenome, idade, cadastro
 
 def listar_usuarios(cadastro):
-    for indice, dados in enumerate(cadastro):
-        print(indice,dados)
+    for dados in enumerate(cadastro):
+        print(dados)
         
-    print()
-       
+    
+def deletar_usuario(criar_usuario(cadastro)):
+        if id in cadastro:
+            
+        return criar_usuario
     
     
 
-def criar_conta(numero_conta):
-    return numero_conta
+def criar_conta(numero_conta, cadastro = []):
+    if numero_conta in cadastro:
+        print("Cadastro já Existe!! ")
+
+    else:
+        print()    
+    return cadastro.append(numero_conta)
 
 
 def depositar(valor, saldo_conta, saldo_inicial, extrato, entradas = [],  /):
